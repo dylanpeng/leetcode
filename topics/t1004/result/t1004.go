@@ -45,25 +45,21 @@ import (
 func LongestOnes(A []int, K int) int {
 	start := time.Now()
 
-	var result, zeroNum int
-	zeroIndex := make([]int, 0, len(A))
+	result, zeroNum, i := 0, 0, 0
 
-	for i, d := range A {
-		var current int
-
-		if d == 0 {
-			zeroIndex = append(zeroIndex, i)
+	for ; i < len(A); i++ {
+		if A[i] == 0 {
+			A[zeroNum] = i
+			zeroNum++
 		}
 
-		zeroNum = len(zeroIndex)
 		if K >= zeroNum {
-			current = i + 1
-		} else {
-			current = i - zeroIndex[zeroNum-K-1]
+			result = i + 1
+			continue
 		}
 
-		if current > result {
-			result = current
+		if i-A[zeroNum-K-1] > result {
+			result = i - A[zeroNum-K-1]
 		}
 	}
 
