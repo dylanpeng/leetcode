@@ -1,10 +1,5 @@
 package result
 
-import (
-	"fmt"
-	"time"
-)
-
 /*
 1004. 最大连续1的个数 III
 
@@ -42,9 +37,11 @@ import (
 链接：https://leetcode-cn.com/problems/max-consecutive-ones-iii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
-func LongestOnes(A []int, K int) int {
-	start := time.Now()
 
+/*
+思路：连续0填空，算出每一位置填空后的最大长度，取最大值
+ */
+func LongestOnes(A []int, K int) int {
 	result, zeroNum, i := 0, 0, 0
 
 	for ; i < len(A); i++ {
@@ -62,9 +59,6 @@ func LongestOnes(A []int, K int) int {
 			result = i - A[zeroNum-K-1]
 		}
 	}
-
-	duration := time.Since(start).Nanoseconds()
-	fmt.Printf("duration: %d ns\n", duration)
 
 	return result
 }
