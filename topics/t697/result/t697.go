@@ -34,15 +34,15 @@ package result
 */
 
 type FirstLastIndex struct {
-	FirstIndex int  //首次出现的下标
-	LastIndex  int  //最后出现的下标
-	Count      int  //出现的次数
+	FirstIndex int //首次出现的下标
+	LastIndex  int //最后出现的下标
+	Count      int //出现的次数
 }
 
 /*
 思路：遍历一次数组用map记录每个数下标及次数信息
 遍历map找到出现最多次数的数字的最小长度
- */
+*/
 func FindShortestSubArray(nums []int) int {
 	result, max := len(nums), 0
 	group := map[int]*FirstLastIndex{}
