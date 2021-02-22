@@ -35,6 +35,10 @@ package result
     0 <= matrix[i][j] <= 99
 
 */
+
+/*
+思路：横排/竖排分别遍历一遍元素对角线
+*/
 func IsToeplitzMatrix(matrix [][]int) bool {
 	m, n, i, j := len(matrix), len(matrix[0]), 0, 0
 
@@ -57,6 +61,23 @@ func IsToeplitzMatrix(matrix [][]int) bool {
 			}
 
 			if matrix[i][0] != matrix[j][j-i] {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+/*
+思路：每个元素与下一行下一列位置元素相等即可
+*/
+func IsToeplitzMatrix2(matrix [][]int) bool {
+	m, n, i, j := len(matrix), len(matrix[0]), 0, 0
+
+	for i = 0; i < m-1; i++ {
+		for j = 0; j < n-1; j++ {
+			if matrix[i][j] != matrix[i+1][j+1] {
 				return false
 			}
 		}
