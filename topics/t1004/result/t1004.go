@@ -40,7 +40,7 @@ package result
 
 /*
 思路：连续0填空，算出每一位置填空后的最大长度，取最大值
- */
+*/
 func LongestOnes(A []int, K int) int {
 	result, zeroNum, i := 0, 0, 0
 
