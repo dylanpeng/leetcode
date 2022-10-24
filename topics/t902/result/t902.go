@@ -48,8 +48,10 @@ func AtMostNGivenDigitSet(digits []string, n int) int {
 	list, listLen := Sort902(digits)
 	nList, nLen := LenInt(n)
 
+	// 计算长度与n一样且小于n的个数
 	count := Count902(list, nList)
 
+	// 计算长度小于n的个数(长度小于n，1～n-1次方相加)
 	if nLen > 1 {
 		for i := 1; i < nLen; i++ {
 			count += Pow902(listLen, i)
@@ -59,6 +61,7 @@ func AtMostNGivenDigitSet(digits []string, n int) int {
 	return count
 }
 
+// 把n分解为int数组并返回长度
 func LenInt(n int) (nList []int, l int) {
 	nStr := strconv.Itoa(n)
 	nList = make([]int, 0, 8)
@@ -72,6 +75,7 @@ func LenInt(n int) (nList []int, l int) {
 	return
 }
 
+// 去重并返回int数组
 func Sort902(digits []string) (result []int, l int) {
 	temp := map[string]int{}
 	result = make([]int, 0, 8)
@@ -88,6 +92,7 @@ func Sort902(digits []string) (result []int, l int) {
 	return
 }
 
+// 计算长度一致的个数
 func Count902(list, nList []int) (result int) {
 	x := len(list)
 	curNum := nList[0]
@@ -99,11 +104,15 @@ func Count902(list, nList []int) (result int) {
 
 	for _, d := range list {
 		if d < curNum {
+			// 最高位较小，次方即可
 			result += Pow902(x, leftLen)
-		} else if d == curNum {
+		} else if d == curNum { // 最高位相等
+			// 最后一位直接返回1
 			if leftLen == 0 {
 				return result + 1
 			}
+
+			// 不是最后一位递归（当前数量+去除最高位剩余数组的个数）
 			return result + Count902(list, nList[1:])
 		} else {
 			return
@@ -113,6 +122,7 @@ func Count902(list, nList []int) (result int) {
 	return
 }
 
+// 数字的次方
 func Pow902(x, y int) int {
 	if y == 0 {
 		return 1
