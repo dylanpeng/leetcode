@@ -1,5 +1,7 @@
 package t2546
 
+import "strings"
+
 // 同时存在1或都为0
 func makeStringsEqual(s string, target string) bool {
 	s1, t1 := false, false
@@ -22,4 +24,8 @@ func makeStringsEqual(s string, target string) bool {
 	}
 
 	return false
+}
+
+func makeStringsEqualMain(s, target string) bool {
+	return strings.Contains(s, "1") == strings.Contains(target, "1")
 }
